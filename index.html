@@ -10,7 +10,7 @@
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
         /* Thiết lập font chữ Inter cho toàn bộ trang */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        @import url('https://fonts-googleapis.com/css2?family=Inter:wght@100..900&display=swap');
         :root {
             font-family: 'Inter', sans-serif;
         }
@@ -37,6 +37,20 @@
         .bg-primary {
             background-color: #A34E2A;
         }
+        /* TH True Milk Inspired Font/Color style */
+        .logo-baromais {
+            font-size: 2.5rem; /* Tương đương 40px */
+            font-weight: 800; /* Extra bold */
+            color: #1E3A8A; /* Màu xanh đậm (Dark blue) */
+            line-height: 0.8;
+            margin-bottom: -5px;
+        }
+        .logo-milk {
+            font-size: 2rem; /* Tương đương 32px */
+            font-weight: 300; /* Light/Thin */
+            color: #3B82F6; /* Màu xanh nhạt (Light blue) */
+            line-height: 1;
+        }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
@@ -45,18 +59,58 @@
     <header class="bg-white shadow-lg sticky top-0 z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             
-            <!-- Logo Baromais Milk -->
-            <div class="flex items-center space-x-2">
-                <span class="text-3xl font-extrabold text-[#A34E2A]">Baromais</span>
-                <span class="text-xl font-medium text-gray-700">Milk</span>
-                <span class="text-4xl">🥛</span>
-            </div>
+            <!-- Logo Baromais Milk - TH STYLE (Ly Sữa Đậu Nành + Chữ) -->
+            <div class="flex items-center space-x-3">
+                
+                <!-- Emblem: Ly Sữa Đậu Nành (Cup/Soy Milk SVG) -->
+                <div class="relative w-12 h-12 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-full h-full text-white absolute" viewBox="0 0 100 100" fill="currentColor">
+                        <!-- Vòng tròn bao ngoài (Blue background) -->
+                        <circle cx="50" cy="50" r="48" fill="#1E3A8A" stroke="#3B82F6" stroke-width="4"/>
+                        <!-- Biểu tượng Ly Sữa (Màu trắng/vàng nhạt) -->
+                        <path d="M 30 30 C 30 20, 70 20, 70 30 L 75 75 C 75 80, 25 80, 25 75 Z" fill="#FBBF24" stroke="#1E3A8A" stroke-width="2"/>
+                        <!-- Sóng sữa (Milk froth) -->
+                        <path d="M 30 30 C 40 25, 60 25, 70 30" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+                        <!-- Bọt sữa (Bubbles) -->
+                        <circle cx="35" cy="30" r="4" fill="#FFFFFF"/>
+                        <circle cx="65" cy="35" r="3" fill="#FFFFFF"/>
+                    </svg>
+                </div>
 
-            <!-- Giỏ hàng và Icon -->
-            <button onclick="openCartModal()" class="relative p-2 rounded-full bg-yellow-100 hover:bg-yellow-200 transition duration-150 card-glow">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-800"><circle cx="8" cy="20" r="1"/><circle cx="17" cy="20" r="1"/><path d="M2.5 2.5h2l.74 2.96L8 16h9l1.6-6.4H7.1"/><path d="M16 9h4l2 4"/></svg>
-                <span id="cart-count" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">0</span>
-            </button>
+                <!-- Brand Name (Phong cách TH True Milk) -->
+                <div class="flex flex-col items-start leading-none">
+                    <span class="logo-baromais uppercase">Baromais</span>
+                    <span class="logo-milk uppercase">MILK</span>
+                </div>
+            </div>
+            
+            <!-- Auth Controls và Giỏ hàng -->
+            <div class="flex items-center space-x-4">
+                <!-- Nút Đăng nhập/Đăng ký/Tài khoản - Đã thêm Dropdown -->
+                <div id="auth-controls" class="relative">
+                    <!-- Nút khi chưa đăng nhập (hiện thị mặc định) -->
+                    <button onclick="openAuthModal()" id="auth-button" class="text-gray-700 hover:text-[#A34E2A] transition duration-150 font-medium p-2 rounded-full bg-gray-100 card-glow">
+                        Đăng ký / Đăng nhập
+                    </button>
+                    
+                    <!-- Dropdown Menu (Chỉ hiện khi đăng nhập) -->
+                    <div id="user-dropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 hidden">
+                        <a href="#" onclick="openProfileModal(); return false;" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            Xem Hồ sơ
+                        </a>
+                        <div class="border-t my-1"></div>
+                        <a href="#" onclick="handleLogout(); return false;" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50 font-semibold">
+                            Đăng xuất
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Giỏ hàng và Icon -->
+                <button onclick="openCartModal()" class="relative p-2 rounded-full bg-yellow-100 hover:bg-yellow-200 transition duration-150 card-glow">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-800"><circle cx="8" cy="20" r="1"/><circle cx="17" cy="20" r="1"/><path d="M2.5 2.5h2l.74 2.96L8 16h9l1.6-6.4H7.1"/><path d="M16 9h4l2 4"/></svg>
+                    <span id="cart-count" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">0</span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -67,10 +121,10 @@
         <div class="grid md:grid-cols-3 gap-8">
             
             <!-- Mascot Alaska Dog (Bé cún biểu tượng) - Cột 1 -->
-            <div class="bg-gradient-to-br from-blue-50 to-blue-200 p-6 rounded-2xl card-glow flex flex-col items-center text-center">
+            <div id="mascot-voucher" onclick="applyVoucher()" class="bg-gradient-to-br from-blue-50 to-blue-200 p-6 rounded-2xl card-glow flex flex-col items-center text-center cursor-pointer hover:shadow-xl">
                 <span class="text-6xl mb-4">🐕‍🦺</span>
-                <h2 class="text-2xl font-bold text-gray-900 mb-2">Linh Vật Alaska</h2>
-                <p class="text-gray-600">Bé cún Alaska của chúng tôi đảm bảo nguồn sữa đậu nành luôn tươi mới và chất lượng tốt nhất từ Baromais Milk.</p>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Mascot Alaska</h2>
+                <p class="text-gray-600">Nhấp vào đây để nhận mã giảm giá đặc biệt 20% cho giỏ hàng!</p>
                 <img src="https://placehold.co/200x200/5C7AEA/FFFFFF?text=Mascot+Alaska" alt="Mascot Alaska Dog" class="rounded-full mt-4 w-32 h-32 object-cover border-4 border-white shadow-md">
             </div>
 
@@ -80,7 +134,8 @@
                     🔥 Mua 2 Tặng 1!
                 </div>
                 <div class="flex flex-col sm:flex-row items-start sm:items-center space-x-6">
-                    <img src="https://placehold.co/150x200/fef7e0/6B4F4F?text=Hanh+Nhan" alt="Sữa Đậu Nành Hạnh Nhân" class="w-24 sm:w-36 h-auto rounded-xl shadow-md flex-shrink-0">
+                    <!-- Ảnh Sữa Đậu Nành Hạnh Nhân MỚI -->
+                    <img src="https://th.bing.com/th/id/R.e589762af2ca66c3d31859a77e02ce60?rik=g%2fV%2fNBnrl7ZPOg&riu=http%3a%2f%2fwww.goowai.it%2fwp-content%2fuploads%2f2017%2f11%2flatte-mandorla_800x534.jpg&ehk=36f8f6Z99BsPElbpVUYQQZiF3hza6Pa3hbp7uGEOz%2bU%3d&risl=&pid=ImgRaw&r=0" onerror="this.src='uploaded:image_0b7c7d.png-db8402d3-9253-4fa8-8cff-7e68c79880fb'" alt="Sữa Đậu Nành Hạnh Nhân" class="w-24 sm:w-36 h-auto rounded-xl shadow-md flex-shrink-0">
                     <div>
                         <h2 class="text-2xl font-bold text-gray-900 mb-2">Sữa Đậu Nành Hạnh Nhân</h2>
                         <!-- Cập nhật giá Hạnh Nhân -->
@@ -105,7 +160,8 @@
                     ⭐ Đại Hạ Giá -20%
                 </div>
                 <div>
-                    <img src="https://placehold.co/150x150/e0fef7/4F6B6B?text=Truyen+Thong" alt="Sữa Đậu Nành Truyền Thống" class="w-full h-auto rounded-xl shadow-md mb-4">
+                    <!-- Ảnh Sữa Đậu Nành Truyền Thống MỚI -->
+                    <img src="https://tinhdau100.vn/uploads/images/bai-viet-2/sua-dau-nanh-1.jpg" onerror="this.src='https://placehold.co/150x150/e0fef7/4F6B6B?text=Truyen+Thong'" alt="Sữa Đậu Nành Truyền Thống" class="w-full h-auto rounded-xl shadow-md mb-4">
                     <h2 class="text-xl font-bold text-gray-900 mb-1">Sữa Đậu Nành Truyền Thống</h2>
                     <p class="text-lg font-semibold text-gray-500 line-through">40.000 VNĐ</p>
                     <!-- Cập nhật giá Truyền Thống -->
@@ -116,22 +172,24 @@
                         <input type="number" id="qty-2" value="1" min="1" class="w-16 p-2 border border-gray-300 rounded-lg text-center focus:ring-[#A34E2A] focus:border-[#A34E2A]">
                         <button onclick="addToCart(2)" class="btn-primary flex-grow">
                             Thêm vào Giỏ hàng
-                        </button>
+                            </button>
                     </div>
 
                 </div>
             </div>
 
-            <!-- Sản phẩm 3: Sữa Đậu Nành Chocolate (1 Tặng 1) -->
+            <!-- Sản phẩm 3: Sữa Đậu Nành Đậu Đỏ (Super Sale 30%) -->
             <div class="bg-white p-6 rounded-2xl card-glow relative md:col-span-1">
-                 <div class="absolute top-0 left-0 bg-yellow-600 text-white text-sm font-bold px-3 py-1 rounded-br-lg rounded-tl-2xl transform translate-y-[-1px]">
-                    ✨ Mua 1 Tặng 1!
+                 <div class="absolute top-0 left-0 bg-red-700 text-white text-sm font-bold px-3 py-1 rounded-br-lg rounded-tl-2xl transform translate-y-[-1px]">
+                    ⚡ SUPER SALE -30%
                 </div>
                 <div>
-                    <img src="https://placehold.co/150x150/331a00/FFFFFF?text=Chocolate" alt="Sữa Đậu Nành Chocolate" class="w-full h-auto rounded-xl shadow-md mb-4">
-                    <h2 class="text-xl font-bold text-gray-900 mb-1">Sữa Đậu Nành Chocolate</h2>
-                    <!-- Cập nhật giá Chocolate -->
-                    <p class="text-xl font-semibold text-gray-800 mb-3">36.000 VNĐ / Lít</p>
+                    <!-- Ảnh Sữa Đậu Nành Đậu Đỏ MỚI -->
+                    <img src="https://cafefcdn.com/203337114487263232/2023/5/26/photo-1685037832310-16850378325361420388705-1685106519481-1685106519742612369931.jpeg" onerror="this.src='https://placehold.co/150x150/331a00/FFFFFF?text=Dau+Do'" alt="Sữa Đậu Nành Đậu Đỏ" class="w-full h-auto rounded-xl shadow-md mb-4">
+                    <h2 class="text-xl font-bold text-gray-900 mb-1">Sữa Đậu Nành Đậu Đỏ</h2>
+                    <p class="text-lg font-semibold text-gray-500 line-through">45.714 VNĐ</p> <!-- Giá gốc để giảm 30% còn 32k -->
+                    <!-- Giá Đậu Đỏ mới -->
+                    <p class="text-xl font-semibold text-red-600 mb-3">32.000 VNĐ / Lít</p>
                     
                     <!-- Quantity Selector for Product 3 -->
                     <div class="flex items-center space-x-2 mt-2">
@@ -150,7 +208,8 @@
                     -15% Chỉ Hôm Nay!
                 </div>
                 <div>
-                    <img src="https://placehold.co/150x150/f0f8ff/4682B4?text=It+Duong" alt="Sữa Đậu Nành Ít Đường" class="w-full h-auto rounded-xl shadow-md mb-4">
+                    <!-- Ảnh Sữa Đậu Nành Ít Đường MỚI -->
+                    <img src="https://sohanews.sohacdn.com/160588918557773824/2022/4/25/10-cong-dung-tuyet-voi-cua-sua-dau-nanh-voi-suc-khoe-con-nguoi-1650696966-2-16508728654261989198027.jpg" onerror="this.src='https://placehold.co/150x150/f0f8ff/4682B4?text=It+Duong'" alt="Sữa Đậu Nành Ít Đường" class="w-full h-auto rounded-xl shadow-md mb-4">
                     <h2 class="text-xl font-bold text-gray-900 mb-1">Sữa Đậu Nành Ít Đường</h2>
                     <p class="text-lg font-semibold text-gray-500 line-through">45.000 VNĐ</p>
                     <!-- Cập nhật giá Ít Đường -->
@@ -170,7 +229,8 @@
             <!-- Sản phẩm 5: Sữa Đậu Nành Óc Chó -->
              <div class="bg-white p-6 rounded-2xl card-glow relative md:col-span-3">
                  <div class="flex flex-col sm:flex-row items-start sm:items-center space-x-6">
-                    <img src="https://placehold.co/150x200/cccccc/333333?text=Oc+Cho" alt="Sữa Đậu Nành Óc Chó" class="w-24 sm:w-36 h-auto rounded-xl shadow-md flex-shrink-0">
+                    <!-- Ảnh Sữa Đậu Nành Óc Chó MỚI -->
+                    <img src="https://toplist.vn/images/800px/sua-hat-oc-cho-687959.jpg" onerror="this.src='https://placehold.co/150x200/cccccc/333333?text=Oc+Cho'" alt="Sữa Đậu Nành Óc Chó" class="w-24 sm:w-36 h-auto rounded-xl shadow-md flex-shrink-0">
                     <div>
                         <h2 class="text-2xl font-bold text-gray-900 mb-2">Sữa Đậu Nành Óc Chó Cao Cấp</h2>
                         <!-- Cập nhật giá Óc Chó -->
@@ -191,6 +251,59 @@
         </div>
     </main>
     
+    <!-- Modal Đăng nhập/Đăng ký (Auth Modal) -->
+    <div id="auth-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden items-center justify-center z-50 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl p-6 w-11/12 max-w-sm card-glow transform transition-transform duration-300 scale-95">
+            <div class="flex justify-between items-center border-b pb-3 mb-4">
+                <h3 class="text-2xl font-bold text-gray-800">Đăng ký / Đăng nhập</h3>
+                <button onclick="closeAuthModal()" class="text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+            </div>
+            
+            <form id="auth-form" onsubmit="handleLogin(event)" class="space-y-4">
+                <p class="text-sm text-gray-600">Đây là giao diện đăng nhập giả lập (simulated login).</p>
+                <input type="email" id="auth-email" placeholder="Email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A34E2A] focus:border-transparent">
+                <input type="password" id="auth-password" placeholder="Mật khẩu" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A34E2A] focus:border-transparent">
+                
+                <button type="submit" class="w-full btn-primary text-lg">
+                    Đăng nhập ngay
+                </button>
+            </form>
+            <p class="text-center text-sm mt-3 text-gray-500">Chưa có tài khoản? <a href="#" class="text-[#A34E2A] font-medium hover:underline">Đăng ký</a></p>
+        </div>
+    </div>
+
+    <!-- Modal Hồ sơ người dùng (Profile Modal) -->
+    <div id="profile-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden items-center justify-center z-50 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl p-6 w-11/12 max-w-sm card-glow transform transition-transform duration-300 scale-95">
+            <div class="flex justify-between items-center border-b pb-3 mb-4">
+                <h3 class="text-2xl font-bold text-gray-800">Thông Tin Tài Khoản</h3>
+                <button onclick="closeProfileModal()" class="text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+            </div>
+            
+            <div id="user-profile-info" class="space-y-3">
+                <!-- Thông tin được điền từ JS -->
+            </div>
+            
+            <button onclick="handleLogout()" class="w-full bg-red-500 text-white p-3 rounded-lg font-semibold hover:bg-red-600 transition mt-6">
+                Đăng xuất
+            </button>
+        </div>
+    </div>
+    
+    <!-- Modal Voucher Success -->
+    <div id="voucher-success-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden items-center justify-center z-50 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl p-8 w-11/12 max-w-sm card-glow transform transition-transform duration-300 scale-95 text-center">
+            <span class="text-6xl mb-4 block">💰</span>
+            <h3 class="text-3xl font-bold text-gray-800 mb-2">Voucher Đã Được Áp Dụng!</h3>
+            <p class="text-xl font-semibold text-green-600 mb-4">Giảm giá 20% giỏ hàng của bạn!</p>
+            <p class="text-gray-600 mb-6">Bạn có thể kiểm tra chi tiết giảm giá trong Giỏ hàng.</p>
+            
+            <button onclick="closeVoucherSuccessModal()" class="btn-primary mt-4">
+                Đóng
+            </button>
+        </div>
+    </div>
+    
     <!-- Modal Giỏ hàng -->
     <div id="cart-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden items-center justify-center z-50 transition-opacity duration-300">
         <div class="bg-white rounded-2xl p-6 w-11/12 max-w-lg card-glow transform transition-transform duration-300 scale-95">
@@ -204,10 +317,8 @@
             </div>
             
             <div class="border-t pt-4 mt-4">
-                <div class="flex justify-between font-semibold text-lg text-gray-800">
-                    <span>Tổng cộng:</span>
-                    <span id="cart-total">0 VNĐ</span>
-                </div>
+                <!-- Tổng tiền sẽ được cập nhật trong JS (tính cả voucher) -->
+                <div id="cart-total" class="font-semibold text-lg text-gray-800">0 VNĐ</div> 
                 <button onclick="openCheckoutModal()" id="checkout-btn" disabled class="w-full mt-4 btn-primary transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
                     Tiến hành Thanh toán
                 </button>
@@ -301,13 +412,16 @@
         // Global state
         let cart = [];
         let lastOrder = {}; 
+        let voucherApplied = false; // NEW: Trạng thái Voucher
+        let isLoggedIn = false;    // NEW: Trạng thái Đăng nhập
+        let userName = 'Khách hàng'; // Tên người dùng giả lập
+        let userEmail = ''; // Email người dùng giả lập
 
-        // Định nghĩa các sản phẩm một lần, bao gồm ID và ID của input số lượng tương ứng
+        // CẬP NHẬT SẢN PHẨM: Sữa Đậu Nành Đậu Đỏ giá mới 32.000 VNĐ
         const products = [
-            // Cập nhật giá tính toán trong JS
             { id: 1, name: 'Sữa Đậu Nành Hạnh Nhân', price: 28000, qtyId: 'qty-1' }, 
             { id: 2, name: 'Sữa Đậu Nành Truyền Thống', price: 33000, qtyId: 'qty-2' }, 
-            { id: 3, name: 'Sữa Đậu Nành Chocolate', price: 36000, qtyId: 'qty-3' }, 
+            { id: 3, name: 'Sữa Đậu Nành Đậu Đỏ', price: 32000, qtyId: 'qty-3' }, // GIÁ MỚI 32.000 VNĐ
             { id: 4, name: 'Sữa Đậu Nành Ít Đường', price: 18000, qtyId: 'qty-4' }, 
             { id: 5, name: 'Sữa Đậu Nành Óc Chó', price: 35000, qtyId: 'qty-5' }, 
         ];
@@ -336,14 +450,11 @@
 
         // --- Chức năng Giỏ hàng ---
 
-        // Hàm chính để thêm sản phẩm vào giỏ hàng (đã được sửa)
         function addToCart(productId) {
             const product = products.find(p => p.id === productId);
             if (!product) return;
 
-            // Đọc số lượng từ input tương ứng
             const quantityInput = document.getElementById(product.qtyId);
-            // Đảm bảo số lượng là số nguyên dương, mặc định là 1
             const quantity = parseInt(quantityInput ? quantityInput.value : 1) || 1; 
 
             if (quantity < 1) {
@@ -364,7 +475,6 @@
                 });
             }
 
-            // Đặt lại số lượng input về 1 sau khi thêm vào giỏ
             if (quantityInput) {
                 quantityInput.value = 1;
             }
@@ -382,27 +492,27 @@
             const checkoutBtn = document.getElementById('checkout-btn');
             
             cartList.innerHTML = '';
+            let subtotal = 0; // Tạm tính (chưa giảm giá)
             let total = 0;
 
             if (cart.length === 0) {
-                if (emptyMessage) { // THÊM KIỂM TRA NULL ĐỂ KHẮC PHỤC LỖI Cannot read properties of null (reading 'style')
-                    // Đảm bảo thông báo giỏ hàng trống hiển thị
+                if (emptyMessage) { 
                     if (emptyMessage.parentNode !== cartList) {
                         cartList.appendChild(emptyMessage);
                     }
                     emptyMessage.style.display = 'block';
                 }
                 checkoutBtn.disabled = true;
+                subtotal = 0;
             } else {
-                // Khi giỏ hàng có sản phẩm, đảm bảo thông báo trống bị ẩn (nếu nó tồn tại)
-                if (emptyMessage) { // THÊM KIỂM TRA NULL TẠI ĐÂY
+                if (emptyMessage) { 
                     emptyMessage.style.display = 'none';
                 }
                 checkoutBtn.disabled = false;
                 
                 cart.forEach(item => {
                     const itemTotal = item.price * item.quantity;
-                    total += itemTotal;
+                    subtotal += itemTotal;
 
                     const itemDiv = document.createElement('div');
                     itemDiv.className = 'flex justify-between items-center bg-gray-50 p-3 rounded-lg border';
@@ -412,12 +522,9 @@
                             <p class="text-sm text-gray-500">${formatCurrency(item.price)} x ${item.quantity}</p>
                         </div>
                         <div class="flex items-center space-x-2">
-                            <!-- Nút giảm số lượng -->
                             <button onclick="changeQuantity(${item.id}, -1)" class="p-1 bg-white border rounded-full hover:bg-gray-200 text-gray-600 w-6 h-6 flex items-center justify-center text-lg leading-none">-</button>
                             <span class="font-medium">${item.quantity}</span>
-                            <!-- Nút tăng số lượng -->
                             <button onclick="changeQuantity(${item.id}, 1)" class="p-1 bg-white border rounded-full hover:bg-gray-200 text-gray-600 w-6 h-6 flex items-center justify-center text-lg leading-none">+</button>
-                            <!-- Nút HỦY/XÓA sản phẩm khỏi giỏ hàng -->
                             <button onclick="removeItem(${item.id})" class="text-red-500 hover:text-red-700 ml-2 p-1 rounded-full hover:bg-red-100 transition duration-150" title="Xóa sản phẩm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
                             </button>
@@ -426,9 +533,32 @@
                     cartList.appendChild(itemDiv);
                 });
             }
+            
+            // Xử lý Voucher và tính tổng cuối cùng
+            if (voucherApplied && subtotal > 0) {
+                const discount = subtotal * 0.20;
+                total = subtotal - discount;
 
+                cartTotalElement.innerHTML = `
+                    <div class="flex justify-between text-base text-gray-500">
+                        <span>Tạm tính:</span>
+                        <span>${formatCurrency(subtotal)}</span>
+                    </div>
+                    <div class="flex justify-between text-base text-green-600 font-semibold border-b pb-2 mb-2">
+                        <span>Giảm 20% Voucher:</span>
+                        <span>-${formatCurrency(discount)}</span>
+                    </div>
+                    <div class="flex justify-between font-semibold text-xl text-gray-800 pt-2">
+                        <span>TỔNG THANH TOÁN:</span>
+                        <span class="text-red-600">${formatCurrency(total)}</span>
+                    </div>
+                `;
+            } else {
+                total = subtotal;
+                cartTotalElement.innerHTML = `<div class="flex justify-between font-semibold text-xl text-gray-800"><span>Tổng cộng:</span><span>${formatCurrency(total)}</span></div>`;
+            }
+            
             cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
-            cartTotalElement.textContent = formatCurrency(total);
         }
 
         function changeQuantity(productId, delta) {
@@ -449,6 +579,110 @@
             cart = cart.filter(item => item.id !== productId);
             updateCartUI();
             showMessage("Đã xóa sản phẩm khỏi giỏ hàng.");
+        }
+        
+        // --- Chức năng Voucher ---
+        
+        function applyVoucher() {
+            if (voucherApplied) {
+                showMessage("Bạn đã sử dụng voucher giảm 20% rồi. Mỗi khách hàng chỉ dùng được 1 lần.");
+                return;
+            }
+            if (cart.length === 0) {
+                showMessage("Giỏ hàng trống. Voucher chỉ áp dụng khi có sản phẩm.");
+                return;
+            }
+
+            // Mở modal thông báo voucher thành công
+            openVoucherSuccessModal();
+            
+            // Cập nhật trạng thái và UI
+            voucherApplied = true;
+            updateCartUI();
+
+            // Vô hiệu hóa nút Mascot để tránh nhấp lần nữa
+            const mascotDiv = document.getElementById('mascot-voucher');
+            if (mascotDiv) {
+                mascotDiv.classList.remove('cursor-pointer', 'hover:shadow-xl');
+                mascotDiv.classList.add('opacity-70', 'cursor-not-allowed');
+                mascotDiv.onclick = null;
+                mascotDiv.querySelector('p').textContent = 'Voucher đã được áp dụng! Kiểm tra giỏ hàng.';
+            }
+        }
+
+        // --- Chức năng Đăng nhập/Đăng xuất/Profile (Simulated) ---
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('user-dropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        function updateAuthUI() {
+            const authButton = document.getElementById('auth-button');
+            const dropdown = document.getElementById('user-dropdown');
+
+            // Xóa mọi handler cũ
+            authButton.onclick = null;
+            authButton.innerHTML = '';
+            
+            if (isLoggedIn) {
+                // Đã đăng nhập: Hiển thị tên và nút mở dropdown
+                authButton.innerHTML = `<span class="text-green-600 font-bold">Xin chào, ${userName}</span> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><path d="m6 9 6 6 6-6"/></svg>`;
+                authButton.classList.remove('bg-gray-100');
+                authButton.classList.add('flex', 'items-center', 'pr-3');
+                authButton.onclick = toggleDropdown; // Gán handler mở dropdown
+                dropdown.classList.add('hidden'); // Đảm bảo đóng dropdown ban đầu
+            } else {
+                 // Chưa đăng nhập: Hiển thị nút Đăng ký/Đăng nhập
+                 authButton.innerHTML = `Đăng ký / Đăng nhập`;
+                 authButton.classList.add('bg-gray-100');
+                 authButton.classList.remove('flex', 'items-center', 'pr-3');
+                 authButton.onclick = openAuthModal; // Gán handler mở modal Auth
+                 dropdown.classList.add('hidden');
+            }
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('auth-email').value;
+            const namePart = email.substring(0, email.indexOf('@')); 
+            
+            userEmail = email; // Lưu email
+            userName = namePart.charAt(0).toUpperCase() + namePart.slice(1);
+            
+            isLoggedIn = true;
+            updateAuthUI();
+            closeAuthModal();
+            showMessage(`Đăng nhập thành công! Chào mừng, ${userName}.`);
+            document.getElementById('auth-form').reset();
+        }
+
+        function handleLogout() {
+            isLoggedIn = false;
+            userName = 'Khách hàng';
+            userEmail = '';
+            updateAuthUI();
+            closeProfileModal(); // Đảm bảo đóng modal hồ sơ nếu đang mở
+            showMessage('Bạn đã đăng xuất tài khoản.');
+        }
+
+        function populateProfileModal() {
+            const profileInfoDiv = document.getElementById('user-profile-info');
+            profileInfoDiv.innerHTML = `
+                <div class="p-3 bg-gray-50 rounded-lg">
+                    <p class="text-sm font-medium text-gray-500">Họ tên giả lập</p>
+                    <p class="text-lg font-bold text-gray-800">${userName}</p>
+                </div>
+                <div class="p-3 bg-gray-50 rounded-lg">
+                    <p class="text-sm font-medium text-gray-500">Email giả lập</p>
+                    <p class="text-lg font-bold text-gray-800">${userEmail || 'Chưa có thông tin'}</p>
+                </div>
+                <div class="p-3 bg-gray-50 rounded-lg">
+                    <p class="text-sm font-medium text-gray-500">Trạng thái Voucher</p>
+                    <p class="text-lg font-bold ${voucherApplied ? 'text-green-600' : 'text-red-500'}">${voucherApplied ? 'Đã kích hoạt' : 'Chưa kích hoạt'}</p>
+                </div>
+            `;
         }
 
         // --- Chức năng Modal (Hộp thoại) ---
@@ -493,36 +727,64 @@
         function closeSuccessModal() { 
             toggleModal('success-modal', false); 
         }
+        
+        function openAuthModal() { 
+             // Đóng dropdown nếu nó đang mở
+            const dropdown = document.getElementById('user-dropdown');
+            dropdown.classList.add('hidden');
+            toggleModal('auth-modal', true); 
+        }
+        function closeAuthModal() { toggleModal('auth-modal', false); }
+        
+        function openProfileModal() {
+            if (!isLoggedIn) {
+                showMessage("Vui lòng đăng nhập để xem hồ sơ.");
+                return;
+            }
+            populateProfileModal();
+            // Đóng dropdown khi mở profile
+            const dropdown = document.getElementById('user-dropdown');
+            dropdown.classList.add('hidden');
+            toggleModal('profile-modal', true); 
+        }
+        function closeProfileModal() { toggleModal('profile-modal', false); }
+        
+        function openVoucherSuccessModal() { toggleModal('voucher-success-modal', true); }
+        function closeVoucherSuccessModal() { toggleModal('voucher-success-modal', false); }
 
-        // --- Xử lý Submit Form ---
+        // --- Xử lý Submit Form Đặt hàng ---
 
         document.getElementById('checkout-form').addEventListener('submit', function(event) {
             event.preventDefault();
             
-            // 1. Lấy thông tin người dùng
             const name = document.getElementById('checkout-name').value;
             const phone = document.getElementById('checkout-phone').value;
             const address = document.getElementById('checkout-address').value;
             const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
-            const totalAmount = document.getElementById('cart-total').textContent;
             
-            // 2. Lưu thông tin đơn hàng
+            // Lấy tổng tiền đã tính toán (đã có giảm giá nếu áp dụng)
+            const totalElement = document.getElementById('cart-total');
+            // Tìm phần tử chứa tổng tiền cuối cùng (thường là text-red-600 hoặc text-gray-800 nếu không có giảm giá)
+            const totalAmountSpan = totalElement.querySelector('.text-red-600, .text-gray-800');
+            const totalAmountText = totalAmountSpan ? totalAmountSpan.textContent : 'N/A';
+            
             lastOrder = {
                 name,
                 phone,
                 address,
                 paymentMethod,
-                totalAmount,
+                totalAmount: totalAmountText,
                 items: [...cart],
+                voucherUsed: voucherApplied ? 'Có (Giảm 20%)' : 'Không',
             };
             
-            // 3. Cập nhật Modal Thành công
             const orderInfoDiv = document.getElementById('order-info');
             orderInfoDiv.innerHTML = `
                 <p><span class="font-semibold text-gray-700">Tên người nhận:</span> ${lastOrder.name}</p>
                 <p><span class="font-semibold text-gray-700">Điện thoại:</span> ${lastOrder.phone}</p>
                 <p><span class="font-semibold text-gray-700">Địa chỉ:</span> ${lastOrder.address}</p>
                 <p><span class="font-semibold text-gray-700">Phương thức:</span> ${lastOrder.paymentMethod}</p>
+                <p><span class="font-semibold text-gray-700">Voucher:</span> ${lastOrder.voucherUsed}</p>
                 <p><span class="font-semibold text-gray-700">Tổng thanh toán:</span> <span class="text-red-600">${lastOrder.totalAmount}</span></p>
                 <p class="pt-2"><span class="font-semibold text-gray-700">Chi tiết sản phẩm:</span></p>
                 <ul class="list-disc list-inside ml-4 text-sm text-gray-600">
@@ -530,18 +792,29 @@
                 </ul>
             `;
 
-            // 4. Mở Modal Thành công
             openSuccessModal();
 
-            // 5. Reset giỏ hàng và form
+            // Reset trạng thái sau khi đặt hàng thành công
             cart = [];
+            voucherApplied = false;
             updateCartUI();
+            
+            // Đảm bảo Mascot được kích hoạt lại
+            const mascotDiv = document.getElementById('mascot-voucher');
+            if (mascotDiv) {
+                mascotDiv.classList.add('cursor-pointer', 'hover:shadow-xl');
+                mascotDiv.classList.remove('opacity-70', 'cursor-not-allowed');
+                mascotDiv.onclick = applyVoucher;
+                mascotDiv.querySelector('p').textContent = 'Nhấp vào đây để nhận mã giảm giá đặc biệt 20% cho giỏ hàng!';
+            }
             this.reset();
         });
 
         // Khởi tạo giao diện khi tải trang
-        document.addEventListener('DOMContentLoaded', updateCartUI);
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartUI();
+            updateAuthUI();
+        });
     </script>
 </body>
 </html>
-
